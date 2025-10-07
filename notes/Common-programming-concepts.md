@@ -1,4 +1,6 @@
-## Variables and mutability:
+# Some Common Programming Concepts
+
+## Variables and mutability
 
 Variables are immutable **by default**
 
@@ -21,7 +23,7 @@ const KGS_IN_A_TON: u16 = 1000;    // this is correct
 
 ---
 
-## Shadowing:
+## Shadowing
 
 This allows another variable to take any uses of a variable's name to itself while in the scope. Constants can also be shadowed but use of **`const`** is necessary each time.
 

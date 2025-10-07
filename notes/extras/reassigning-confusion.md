@@ -1,4 +1,4 @@
-## Shadowing vs Reassigning:
+# Shadowing vs Reassigning
 
 In a shadowing example, I tried to execute this code:
 
