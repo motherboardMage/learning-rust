@@ -49,7 +49,7 @@ warning: unused variable: `x`
 error: aborting due to 1 previous error; 1 warning emitted
 ```
 
-Let's go over the problem. I wrote **`let x *= 2`**. This is a problem as **`*=`** is not used for *initialising* a variable (which, shadowing is) but to *reassign* an already *initialsed* variable, a value of it multiplied by something else. To fix it, we remove the **`*=`** and replace it with **`= x * 2`**.
+Let's go over the problem. I wrote **`let x *= 2`**. This is a problem as **`*=`** is not used for *initialising* a variable (which, shadowing is) but to *reassign* an already *initialised* variable, a value of it multiplied by something else. To fix it, we remove the **`*=`** and replace it with **`= x * 2`**.
 
 ```rust
 //x *= 2;
