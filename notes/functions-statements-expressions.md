@@ -48,6 +48,8 @@ Here, **`y`** is bound to the value **`6`**, as in the inner scope,
 
 **`x + 1`** is just an expression that is evaluated to the value **`6`** and is returned as the scope ends. **Notice that expressions do not end in semicolons**.
 
+---
+
 ## Functions that return a value
 
 In Rust, **`functions`** return the last expression by default but we can return early by using the **`return`** keyword and specifiying the value. **`Functions`** that return a value must also have a **`type specifier`** after an arrow **`->`**. For example,
@@ -57,3 +59,5 @@ fn five() -> u8 {
     5
 }
 ```
+
+---
