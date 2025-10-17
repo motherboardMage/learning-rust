@@ -1,4 +1,9 @@
-/target
-/.*
+# Ignore all target directories for Rust projects
+**/target/
 
+# Ignore all dotfiles and dot-directories
+.*
+!.gitignore
+
+# Ignore macOS specific files
 .DS_Store
