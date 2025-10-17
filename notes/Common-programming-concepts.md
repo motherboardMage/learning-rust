@@ -65,6 +65,6 @@ let mut spaces = "    ";
 let spaces = spaces.len();
 ```
 
-Be careful while shadowing as there may be confusion between shadowing and assigning sometimes. See [[reassigning-confusion]], **it is very important**.
+Be careful while shadowing as there may be confusion between shadowing and assigning sometimes among other problems. See [reassigning-confusion](/notes/extras/Reassigning-confusion.md) and [shadowing-confusion](/notes/extras/shadowing-confusion.md), **these are very important**.
 
 ---
