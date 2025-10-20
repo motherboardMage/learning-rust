@@ -67,3 +67,70 @@ println!("{r3}");
 In the above code, since the references **`r1`** and **`r2`** aren't used after the first **`println!()`**, their scope ends there and so the third reference **`r3`** to the string is valid.
 
 ---
+
+## Dangling References
+
+The Rust compiler guarantees that there are no *dangling references*. A *dangling reference* would be a reference that would point to a freed memory location, or some place which does not have any data associated with it. The compiler ensures that the data would never go out of scope before the reference to the data does.
+
+Example code,
+
+```rust
+fn main() {
+    let s = dangle();
+
+    println!("{s}");
+}
+
+fn dangle() -> &String {
+    let s = String::from("Hello");
+
+    &s;
+}
+```
+
+This, on compiling gives,
+
+```rust
+error[E0106]: missing lifetime specifier
+ --> dangling.rs:7:16
+  |
+7 | fn dangle() -> &String {
+  |                ^ expected named lifetime parameter
+  |
+  = help: this function's return type contains a borrowed value, but there is no value for it to be borrowed from
+help: consider using the `'static` lifetime, but this is uncommon unless you're returning a borrowed value from a `const` or a `static`
+  |
+7 | fn dangle() -> &'static String {
+  |                 +++++++
+help: instead, you are more likely to want to return an owned value
+  |
+7 - fn dangle() -> &String {
+7 + fn dangle() -> String {
+  |
+
+error: aborting due to 1 previous error
+
+For more information about this error, try `rustc --explain E0106`.
+```
+
+As you can see, the compiler detects that **`s`** contains a reference to a value that does not exist anymore (The other **`s`** in the separate function went out of scope and was dropped so its value does not exist in the memory anymore).
+
+The solution here would be to return the **`String`** directly.
+
+```rust
+fn main() {
+    let s = dangle();
+
+    println!("{s}");
+}
+
+fn dangle() -> &String {
+    let s = String::from("Hello");
+
+    s;
+}
+```
+
+And this works.
+
+---
