@@ -1,5 +1,3 @@
 [workspace]
-members = [
-    "projects/*"
-]
+members = ["code/first-word", "projects/*"]
 resolver = "2"
