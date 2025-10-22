@@ -10,7 +10,6 @@ fn main() {
         email: String::from("stupid@email.com"),
         age: 52,
     };
-
     person1.name = String::from("more_offensive_name");
 
     println!(
@@ -21,8 +20,18 @@ fn main() {
     let person2 = create_new_person(String::from("somebody"), String::from("iused@to.know"), 45);
 
     println!(
-        "name: {}\ne-mail: {}\nage: {}",
+        "name: {}\ne-mail: {}\nage: {}\n",
         person2.name, person2.email, person2.age
+    );
+
+    let person3 = Person {
+        name: String::from("Pandey"),
+        ..person2
+    };
+
+    println!(
+        "name: {}\ne-mail: {}\nage: {}",
+        person3.name, person3.email, person3.age
     );
 }
 
