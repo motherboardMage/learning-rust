@@ -13,7 +13,7 @@ fn main() {
         print!("Enter your guess: ");
         io::stdout().flush().expect("Could not flush stdout");
 
-        let mut guess = String::new(); // Declare and initialise an empty string
+        let mut guess = String::new(); // Declare and initialize an empty string
 
         io::stdin()
             .read_line(&mut guess)
