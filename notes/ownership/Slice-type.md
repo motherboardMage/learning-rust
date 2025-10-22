@@ -65,3 +65,103 @@ let w = &s[7..12];
 println!("--{h}--");
 println!("--{w}--");
 ```
+
+This program will output:
+
+```zsh
+--Hello--
+--world--
+```
+
+So the syntax for **`string slices`** is something like this,
+
+```rust
+&string_name[starting_of_slice..end_of_slice];
+```
+
+The **`end_of_slice`** is the index where the **`String`** will be sliced so, it must always be 1 more than the last index of the piece what we wish to separate.
+
+Rather than referring to the entire **`String`**, a **`string slice`** has two fields:
+
+1. A reference to the start of the *slice*
+2. The length of the slice
+
+If we want the start or end of a **`String`** to be included in our slice, we can remove the corresponding value around the two dots **`..`**.
+
+```rust
+&s[..i]     // Slices from first to index i
+&s[i..]     // Slices from index i to last
+&s[i..k]    // Slices from index i to k
+&s[..]      // Slices the entire string
+```
+
+Now, if we write the same first word program using *string slice*, we get
+
+```rust
+fn main() {
+    let mut s = String::from("Hello world!");
+
+    let first = find_first_word(&s);
+
+    s.clear();
+
+    println!("First word was {first}");
+}
+
+fn find_first_word(input: &str) -> &str {
+    for (i, ch) in input.chars().enumerate() {
+        if ch == ' ' {
+            return &input[..i];
+        }
+    }
+    &input[..]
+}
+```
+
+The previous program with the indexing approach also had a logical issue that the index was invalid after the **`String`** was cleared but we didn't get an error. If that issue created a bug later on in a larger program, it would be very difficult to track. Here although, if we compile the program, we get an error,
+
+```zsh
+error[E0502]: cannot borrow `s` as mutable because it is also borrowed as immutable
+ --> first-slice.rs:6:5
+  |
+4 |     let first = find_first_word(&s);
+  |                                 -- immutable borrow occurs here
+5 |
+6 |     s.clear();
+  |     ^^^^^^^^^ mutable borrow occurs here
+7 |
+8 |     println!("First word was {first}");
+  |                               ----- immutable borrow later used here
+
+error: aborting due to 1 previous error
+
+For more information about this error, try `rustc --explain E0502`.
+```
+
+Clearly, this says that we cannot take a mutable borrow of **`s`** as it has been borrowed before in **`find_first_word`**. This makes it much easier to debug our code. Now this program can be fixed easily by moving the **`println!()`** line above the **`s.clear()`** line.
+
+---
+
+## String Literals as Slices
+
+We know **`String literals`** are stored directly inside the binary. The type of a **`String literal`** is **`&str`**. It is a slice pointing to a specific location in the binary. This is also why they are *immutable* as **`&str`** is an *immutable reference*.
+
+---
+
+## Other Slices
+
+Just like **`string slices`**, there is the more general **`slice`** type too. Here is it applied to an array:
+
+```rust
+let arr = [1, 2, 3, 4, 5];
+
+let arr_slice = &arr[..3];
+
+assert_eq!(slice, &[1, 2, 3]);
+```
+
+This **`slice`** has the type &[i32] and works the same way as other slices by storing a reference to the first element of the **`slice`** and its length. Here, the last element is excluded. So the **`slice`** contains the elements [1, 2, 3].
+
+The last line just verifies if the elements in the **`slice`** are what we expect by creating a temporary array of elements [1, 2, 3] and comparing it to the **`slice`** we created.
+
+---
