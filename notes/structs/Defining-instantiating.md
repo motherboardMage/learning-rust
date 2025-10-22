@@ -81,3 +81,34 @@ let user2 = User {
 This creates user2 of the type **`User`** and copies all data from user1 other than its username which we have explicitly mentioned.
 
 Remember, a compound type will be moved if any of its members implement the **`Copy`** trait. So, if we use the above syntax, user1 will be moved into user2 and will be inaccessible after the struct update but, if we gave user2 its own new *username* and *email* values and copied the rest of the values from user1, it would not be moved into user2.
+
+---
+
+## Tuple Structs
+
+Behave similarly to *tuples* but have the added meaning of having a name. These are useful where adding names to individual fields would be verbose and irrelevant.
+
+```rust
+struct Color(i32, i32, i32);
+struct Point(i32, i32, i32);
+
+fn main() {
+    let black = Color(0, 0, 0);
+    let origin = Point(0, 0, 0);
+}
+```
+
+These also help as different structs are considered entirely different types from one another so, for example, a function accepting a **`Color`** type won't accept a **`Point`** type even though they may have the same typed and valued fields.
+
+Like regular *tuples*, they can be *destructured* and their fields can be accessed by using the dot followed by index syntax "**`.idx`**".
+
+```rust
+let (x, y, z) = origin;
+
+let some_point = Point(12, 54, 3);
+
+some_point.0 = 11;
+some_point.1 = 23;
+```
+
+---
