@@ -60,7 +60,7 @@ Now here the program reports that the first word in the **`String`** ends at pos
 let s = String::from("Hello, World");
 
 let h = &s[0..5];
-let w = &s[6..11];
+let w = &s[7..12];
 
 println!("--{h}--");
 println!("--{w}--");
