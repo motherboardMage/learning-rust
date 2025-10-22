@@ -43,7 +43,7 @@ We can also instantiate a struct by returning it from another function.
 
 ```rust
 fn main() {
-    let mut user1 = create_new_user()
+    let mut user1 = create_new_user();
 }
 
 fn create_new_user(username: String, email: String, age: u8) -> User {
@@ -68,3 +68,16 @@ fn create_new_user(username: String, email: String, age: u8) -> User {
     }
 }
 ```
+
+It is also possible to initialize a struct variable from another one by using **`..`** if the variables are of the same struct type.
+
+```rust
+let user2 = User {
+    username: String::from("someone_else"),
+    ..user1
+};
+```
+
+This creates user2 of the type **`User`** and copies all data from user1 other than its username which we have explicitly mentioned.
+
+Remember, a compound type will be moved if any of its members implement the **`Copy`** trait. So, if we use the above syntax, user1 will be moved into user2 and will be inaccessible after the struct update but, if we gave user2 its own new *username* and *email* values and copied the rest of the values from user1, it would not be moved into user2.
