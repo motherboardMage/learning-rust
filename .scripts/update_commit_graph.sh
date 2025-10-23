@@ -54,7 +54,7 @@ TMP_FILE=$(mktemp)
 export graph_for_awk="$graph"
 awk '
   BEGIN {p=1; graph=ENVIRON["graph_for_awk"]}
-  /<!-- START_COMMIT_GRAPH -->/ {print; printf "%s", graph; p=0}
+  /<!-- START_COMMIT_GRAPH -->/ {print; print graph; p=0}
   /<!-- END_COMMIT_GRAPH -->/ {p=1}
   p {print}
 ' "$README_PATH" > "$TMP_FILE" && mv "$TMP_FILE" "$README_PATH"
