@@ -45,7 +45,7 @@ I've structured this repository to keep my learnings organized and easy to navig
 This graph automatically updates to show my commit activity over the last 7 days.
 
 <!-- START_COMMIT_GRAPH -->
-Thu (2025-10-23): 4 commits ████
+Thu (2025-10-23): 5 commits █████
 Wed (2025-10-22): 15 commits ███████████████
 Tue (2025-10-21): 1 commits █
 Mon (2025-10-20): 6 commits ██████
@@ -57,7 +57,7 @@ Fri (2025-10-17): 2 commits ██
 
 ## ⚙️ Automation
 
-The commit graph above is updated automatically using a `post-commit` git hook. The hook runs the `.scripts/update_commit_graph.sh` script after each commit, which regenerates the graph and amends the commit to include the update.
+The commit graph above is updated automatically using a `post-commit` git hook. The hook runs the `.scripts/update_commit_graph.sh` script **only when a commit is made on the `main` branch**. It then regenerates the graph and amends the commit to include the update.
 
 If you clone this repository, you'll need to set up the git hook yourself as they are not tracked by git. You can do this by running the following command from the project root:
 
