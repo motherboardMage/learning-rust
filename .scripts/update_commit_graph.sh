@@ -42,7 +42,7 @@ for i in {0..6}; do
     for ((j=0; j<$count; j++)); do
       bar+="█"
     done
-    graph="${graph}${day_name} (${day}): ${count} commits ${bar}"$'
+    graph="${graph}${day_name} (${day}): ${count} commits ${bar}  "$'
 '
   fi
 done
