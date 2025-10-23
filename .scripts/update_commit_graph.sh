@@ -42,7 +42,8 @@ for i in {0..6}; do
     for ((j=0; j<$count; j++)); do
       bar+="█"
     done
-    graph+="$day_name ($day): $count commits $bar\n"
+    graph="${graph}${day_name} (${day}): ${count} commits ${bar}"$'
+'
   fi
 done
 
@@ -50,11 +51,9 @@ done
 # Use a temporary file to avoid issues with in-place editing
 TMP_FILE=$(mktemp)
 
-# awk requires backslashes to be escaped
-graph_escaped=$(echo -e "$graph")
-
-awk -v graph="$graph_escaped" '
-  BEGIN {p=1}
+export graph_for_awk="$graph"
+awk '
+  BEGIN {p=1; graph=ENVIRON["graph_for_awk"]}
   /<!-- START_COMMIT_GRAPH -->/ {print; printf "%s", graph; p=0}
   /<!-- END_COMMIT_GRAPH -->/ {p=1}
   p {print}
