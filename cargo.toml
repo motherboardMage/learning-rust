@@ -1,3 +1,3 @@
 [workspace]
-members = ["code","code/coding_problems","code/first-word", "projects/*"]
+members = ["code/coding_problems", "code/first-word", "projects/guessing_game"]
 resolver = "2"
