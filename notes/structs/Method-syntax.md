@@ -93,3 +93,26 @@ fn main() {
     }
 }
 ```
+
+---
+
+## Associated Functions
+
+All functions defined after **`impl`** are called *associated functions*. Here the ones that have **`self`** as their first parameter are called methods but it isn't necessary for them to have it.
+
+We've used such a function associated with **`String`**, the **`from()`** function. Such associated functions are often called *constructors* and are called with the double colon **`::`** syntax like **`String::from()`**.
+
+Here's an associated function **`square()`** on **`Rectangle`**.
+
+```rust
+fn square(size: u32) -> Self {
+    Rectangle {
+        width: size,
+        height: size,
+    }
+}
+```
+
+Every struct can also have multiple **`impl`** blocks.
+
+---
