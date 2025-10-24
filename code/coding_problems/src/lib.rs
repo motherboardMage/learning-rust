@@ -1,21 +1,28 @@
-pub fn get_number_from_user(prompt: &str) -> i64 {
+use std::process::exit;
+
+pub fn input_with_exit(prompt: &str) -> String {
     use std::io::{self, Write};
 
-    loop {
-        print!("{prompt}");
-        let _ = io::stdout().flush();
+    print!("{prompt}");
+    let _ = io::stdout().flush();
 
-        let mut input = String::new();
-        io::stdin()
-            .read_line(&mut input)
-            .expect("Could not read input!");
+    let mut input = String::new();
+    io::stdin()
+        .read_line(&mut input)
+        .expect("Could not read input!");
 
-        match input.trim().parse() {
-            Ok(num) => return num,
-            Err(_) => {
-                println!("Enter a valid number!");
-                continue;
-            }
+    if input.trim() == "e" {
+        exit(0);
+    }
+    input
+}
+
+pub fn to_number(input: &str) -> Option<u32> {
+    match input.trim().parse() {
+        Ok(num) => Some(num),
+        Err(_) => {
+            println!("Enter a valid number!");
+            None
         }
     }
 }
