@@ -21,7 +21,7 @@ pub fn to_number(input: &str) -> Option<u32> {
     match input.trim().parse() {
         Ok(num) => Some(num),
         Err(_) => {
-            println!("Enter a valid number!");
+            println!("Enter a valid input!");
             None
         }
     }
