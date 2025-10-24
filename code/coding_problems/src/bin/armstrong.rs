@@ -8,10 +8,12 @@ fn main() {
             None => continue,
         };
 
-        let len = num_str.trim().len();
+        let trimmed = num_str.trim();
+
+        let len = trimmed.len();
         let mut sum: u32 = 0;
 
-        for ch in num.to_string().chars() {
+        for ch in trimmed.chars() {
             match ch.to_digit(10) {
                 Some(digit) => sum += digit.pow(len as u32),
                 None => {
