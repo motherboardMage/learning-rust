@@ -45,12 +45,12 @@ I've structured this repository to keep my learnings organized and easy to navig
 This graph automatically updates to show my commit activity over the last 7 days.
 
 <!-- START_COMMIT_GRAPH -->
+Mon (2025-10-27): 2 commits ██  
 Sat (2025-10-25): 2 commits ██  
 Fri (2025-10-24): 3 commits ███  
 Thu (2025-10-23): 9 commits █████████  
 Wed (2025-10-22): 15 commits ███████████████  
 Tue (2025-10-21): 1 commits █  
-Mon (2025-10-20): 6 commits ██████  
 
 <!-- END_COMMIT_GRAPH -->
 
