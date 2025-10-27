@@ -113,8 +113,8 @@ fn main() {
     let five = Some(5);
 
     let six = match add_one(five) {
-        None => panic!(),
-        Some(value) => value,
+        None => panic!(),       // Makes the process quit
+        Some(value) => value,   // Binds value stored in variant to six
     };
 
     println!("{}", six)
@@ -124,3 +124,41 @@ fn main() {
 Above code takes an **`Option<i32>`**, adds one to the value stored in it and converts it to an **`i32`** to then be printed.
 
 Matches are exhaustive so in a match statement, one must cover all variants an Enum can be or the code would not compile.
+
+---
+
+## Catch-All Patterns and the _ Placeholder
+
+We can use just a variable name in a match arm to simply hold any value which will match and bind to any value if we want to use it or the **`_`** placeholder which will match to any value but will not bind to it.
+
+```rust
+match dice_roll {
+    3 => add_fancy_hat(),
+    7 => remove_fancy_hat(),
+    other => advance_player(other),
+}
+```
+
+Above example performs special operations when dice_roll is 3 or 7 but advances the player by the number of steps of any other rolls.
+
+```rust
+match dice_roll {
+    3 => add_fancy_hat(),
+    7 => remove_fancy_hat(),
+    _ => reroll(),
+}
+```
+
+The above code rerolls the dice so it does not have any need to store the value of rolls since 3 and 7 are already covered so all the cases are covered in these 3 arms and match statement is satisfied.
+
+We can also replace **`reroll()`** with an empty tuple to make sure that nothing happens if the roll is anything other than 3 and 7.
+
+```rust
+match dice_roll {
+    3 => add_fancy_hat(),
+    7 => remove_fancy_hat(),
+    _ => (),
+}
+```
+
+---
