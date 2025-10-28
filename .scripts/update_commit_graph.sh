@@ -33,8 +33,7 @@ for cdate in $commit_dates; do
       counts[$i]=$((${counts[$i]} + 1))
       break
     fi
-  done
-done
+  
 
 # Generate the visualization
 graph=""
@@ -46,10 +45,9 @@ for i in {0..6}; do
   bar=""
   if [[ $count -gt 0 ]]; then
     for ((j=0; j<$count; j++)); do
-      bar+="█"
+      bar+="■"
     done
-    graph="${graph}${day_name} (${day}): ${count} commits ${bar}  "$'
-'
+    graph+=$(printf "%-23s %-3d commits | %s\n" "${day_name} (${day})" "${count}" "${bar}")
   fi
 done
 
