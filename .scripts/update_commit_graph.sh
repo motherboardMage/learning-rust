@@ -36,8 +36,7 @@ for cdate in $commit_dates; do
 done
 
 # Generate the visualization
-graph="```text
-"
+graph=""
 for i in {0..6}; do
   day=${days[$i]}
   # macOS date command to get day name from date string
@@ -52,7 +51,6 @@ for i in {0..6}; do
     graph+=$'\n'
   fi
 done
-graph+="```"
 
 # Update Readme.md
 # Use a temporary file to avoid issues with in-place editing
@@ -61,7 +59,7 @@ TMP_FILE=$(mktemp)
 export graph_for_awk="$graph"
 awk '
   BEGIN {p=1; graph=ENVIRON["graph_for_awk"]}
-  /<!-- START_COMMIT_GRAPH -->/ {print; print graph; p=0}
+  /<!-- START_COMMIT_GRAPH -->/ {print; print "```text"; print graph; print "```"; p=0}
   /<!-- END_COMMIT_GRAPH -->/ {p=1}
   p {print}
 ' "$README_PATH" > "$TMP_FILE" && mv "$TMP_FILE" "$README_PATH"
