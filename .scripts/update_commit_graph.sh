@@ -1,7 +1,5 @@
 #!/bin/bash
 
-echo "Running update_commit_graph.sh"
-
 # This script calculates the commit activity for the last 7 days and updates the Readme.md file with a graph.
 
 # Get the absolute path to the project root
@@ -11,7 +9,6 @@ README_PATH="$PROJECT_ROOT/Readme.md"
 # Check the last commit message
 LAST_COMMIT_MESSAGE=$(git log -1 --pretty=%B)
 if [[ "$LAST_COMMIT_MESSAGE" == "docs: Update commit graph in Readme.md" ]]; then
-  echo "Skipping graph update because the last commit was a graph update."
   exit 0
 fi
 
@@ -68,7 +65,6 @@ awk '
   p {print}
 ' "$README_PATH" > "$TMP_FILE" && mv "$TMP_FILE" "$README_PATH"
 
-echo "Attempting to commit readme changes"
 # Stage and commit the changes
 git add "$README_PATH"
 git commit -m "docs: Update commit graph in Readme.md"
