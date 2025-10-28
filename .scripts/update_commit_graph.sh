@@ -7,8 +7,7 @@ PROJECT_ROOT=$(git rev-parse --show-toplevel)
 README_PATH="$PROJECT_ROOT/Readme.md"
 
 # Check the last commit message
-LAST_COMMIT_MESSAGE=$(git log -1 --pretty=%B)
-if [[ "$LAST_COMMIT_MESSAGE" == "docs: Update commit graph in Readme.md" ]]; then
+if git log -1 --pretty=%B | grep -q "docs: Update commit graph in Readme.md"; then
   exit 0
 fi
 
@@ -24,7 +23,7 @@ for i in {0..6}; do
 done
 
 # Get commit dates for the last 7 days
-commit_dates=$(git log --since="1 week ago" --pretty=format:%cs)
+commit_dates=$(git log --since="1 week ago" --pretty=format:%cs --grep="docs: Update commit graph in Readme.md" --invert-grep)
 
 # Count commits for each day
 for cdate in $commit_dates; do
@@ -37,7 +36,8 @@ for cdate in $commit_dates; do
 done
 
 # Generate the visualization
-graph=""
+graph="```text
+"
 for i in {0..6}; do
   day=${days[$i]}
   # macOS date command to get day name from date string
@@ -52,6 +52,7 @@ for i in {0..6}; do
     graph+=$'\n'
   fi
 done
+graph+="```"
 
 # Update Readme.md
 # Use a temporary file to avoid issues with in-place editing
