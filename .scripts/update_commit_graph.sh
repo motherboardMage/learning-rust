@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "Running update_commit_graph.sh"
+
 # This script calculates the commit activity for the last 7 days and updates the Readme.md file with a graph.
 
 # Get the absolute path to the project root
@@ -49,7 +51,8 @@ for i in {0..6}; do
     for ((j=0; j<$count; j++)); do
       bar+="█"
     done
-    graph="${graph}${day_name} (${day}): ${count} commits ${bar}  "$'\n'
+    graph="${graph}${day_name} (${day}): ${count} commits ${bar}  "$'
+'
   fi
 done
 
@@ -65,6 +68,7 @@ awk '
   p {print}
 ' "$README_PATH" > "$TMP_FILE" && mv "$TMP_FILE" "$README_PATH"
 
+echo "Attempting to commit readme changes"
 # Stage and commit the changes
 git add "$README_PATH"
 git commit -m "docs: Update commit graph in Readme.md"
