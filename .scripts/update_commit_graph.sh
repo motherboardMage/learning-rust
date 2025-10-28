@@ -48,7 +48,8 @@ for i in {0..6}; do
     for ((j=0; j<$count; j++)); do
       bar+="■"
     done
-    graph+=$(printf "%-23s %-3d commits | %s\n" "${day_name} (${day})" "${count}" "${bar}")
+    graph+=$(printf "%-23s %-3d commits | %s" "${day_name} (${day})" "${count}" "${bar}")
+    graph+=$'\n'
   fi
 done
 
