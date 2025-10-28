@@ -6,6 +6,13 @@
 PROJECT_ROOT=$(git rev-parse --show-toplevel)
 README_PATH="$PROJECT_ROOT/Readme.md"
 
+# Check the last commit message
+LAST_COMMIT_MESSAGE=$(git log -1 --pretty=%B)
+if [[ "$LAST_COMMIT_MESSAGE" == "docs: Update commit graph in Readme.md" ]]; then
+  echo "Skipping graph update because the last commit was a graph update."
+  exit 0
+fi
+
 # Initialize arrays to store dates and counts
 days=()
 counts=()
@@ -42,8 +49,7 @@ for i in {0..6}; do
     for ((j=0; j<$count; j++)); do
       bar+="█"
     done
-    graph="${graph}${day_name} (${day}): ${count} commits ${bar}  "$'
-'
+    graph="${graph}${day_name} (${day}): ${count} commits ${bar}  "$'\n'
   fi
 done
 
@@ -58,3 +64,7 @@ awk '
   /<!-- END_COMMIT_GRAPH -->/ {p=1}
   p {print}
 ' "$README_PATH" > "$TMP_FILE" && mv "$TMP_FILE" "$README_PATH"
+
+# Stage and commit the changes
+git add "$README_PATH"
+git commit -m "docs: Update commit graph in Readme.md"
