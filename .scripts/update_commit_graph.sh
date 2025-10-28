@@ -33,7 +33,8 @@ for cdate in $commit_dates; do
       counts[$i]=$((${counts[$i]} + 1))
       break
     fi
-  
+  done
+done
 
 # Generate the visualization
 graph=""
