@@ -1,31 +1,24 @@
 use coding_problems::input_with_exit;
 
 fn main() {
-    let input = input_with_exit("Enter 5 numbers seperated by space: ");
+    let input = input_with_exit("Enter numbers seperated by spaces: ");
 
-    let mut nums = [0; 5];
-    let mut counter = 0;
+    let mut nums: Vec<i32> = Vec::new();
 
     for str in input.split_whitespace() {
-        if counter == 5 {
-            println!(
-                "You entered more than 5
-                 numbers, skipping the rest"
-            );
-            break;
-        }
-        nums[counter] = match str.parse::<i32>() {
+        let num = match str.parse::<i32>() {
             Ok(num) => num,
             Err(_) => {
                 println!("{} is not a number, skipping it.", str);
                 continue;
             }
         };
-        counter += 1;
+
+        nums.push(num);
     }
 
     nums.sort();
-    let result = stats(&nums[nums.len() - counter..]);
+    let result = stats(&nums);
 
     println!(
         "Mean of array is {}\nMedian of array is {}",
@@ -39,7 +32,7 @@ fn main() {
 }
 
 fn stats(nums: &[i32]) -> (f64, f64, Option<i32>) {
-    if nums.len() == 0 {
+    if nums.is_empty() {
         return (0.0, 0.0, None);
     }
 
@@ -85,8 +78,9 @@ fn calculate_mode(nums: &[i32]) -> Option<i32> {
         mode = nums[nums.len() - 1]
     }
 
-    if max == 1 {
-        return None;
+    match (max, nums.len()) {
+        (1, 1) => Some(nums[0]),
+        (1, _) => None,
+        (_, _) => Some(mode),
     }
-    Some(mode)
 }
