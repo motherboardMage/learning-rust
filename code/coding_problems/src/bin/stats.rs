@@ -1,7 +1,7 @@
 use coding_problems::input_with_exit;
 
 fn main() {
-    let input = input_with_exit("Enter numbers seperated by spaces: ");
+    let input = input_with_exit("Enter numbers seperated by spaces: ", true);
 
     let mut nums: Vec<i32> = Vec::new();
 

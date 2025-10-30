@@ -1,6 +1,6 @@
 use std::process::exit;
 
-pub fn input_with_exit(prompt: &str) -> String {
+pub fn input_with_exit(prompt: &str, can_exit: bool) -> String {
     use std::io::{self, Write};
 
     print!("{prompt}");
@@ -11,7 +11,7 @@ pub fn input_with_exit(prompt: &str) -> String {
         .read_line(&mut input)
         .expect("Could not read input!");
 
-    if input.trim() == "e" {
+    if can_exit && input.trim() == "e" {
         exit(0);
     }
     input

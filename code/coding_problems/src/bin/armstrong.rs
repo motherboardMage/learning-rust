@@ -1,7 +1,7 @@
 use coding_problems::{input_with_exit, to_number};
 fn main() {
     'main_loop: loop {
-        let num_str = input_with_exit("Enter a number or 'e' to exit: ");
+        let num_str = input_with_exit("Enter a number or 'e' to exit: ", true);
 
         let num = match to_number(&num_str) {
             Some(n) => n,
