@@ -49,7 +49,7 @@ fn calculate_reward(drop: Drop) -> u32 {
 //            |-> match to drop and bind value to rarity
         println!("Not a card!");
         return 0;
-    }
+    };
 
     // control reaches here, meaning
     // the drop was indeed a card
