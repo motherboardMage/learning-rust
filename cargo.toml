@@ -1,3 +1,9 @@
 [workspace]
-members = ["code/coding_problems", "code/first-word", "notes/packages-crates-modules/snippets/modules", "projects/guessing_game"]
+members = [
+    "code/coding_problems",
+    "code/first-word",
+    "notes/packages-crates-modules/snippets/thela",
+    "notes/packages-crates-modules/snippets/algos",
+    "projects/guessing_game",
+]
 resolver = "2"
