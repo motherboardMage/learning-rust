@@ -4,6 +4,6 @@ members = [
     "code/first-word",
     "notes/packages-crates-modules/snippets/thela",
     "notes/packages-crates-modules/snippets/algos",
-    "projects/guessing_game",
+    "projects/guessing_game", "rustlings",
 ]
 resolver = "2"
