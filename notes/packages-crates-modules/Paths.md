@@ -100,6 +100,7 @@ fn function2() -> IoResult<()> {
 This and the other way are both considered idiomatic.
 
 ---
+
 ## Re-exporting names with `pub use`
 
 When we being a name into scope using **`use`**, the name is private to the scope we imported it in. We use pub use to enable external code refer to the name as if it had been declared in that scope. For example, if we added **`pub`** to the restaurant code
