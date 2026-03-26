@@ -52,4 +52,4 @@ fn main() {
 
 ---
 
-## Propogating errors
+## Propagating errors
